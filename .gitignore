@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local working files
+*.local
+*.tmp
+*.log
+
+# Packaged skill artifacts (rebuild on demand)
+*.zip
+*.skill
+
+# Node (if scripts/ ever gets Node tooling)
+node_modules/
+package-lock.json
+
+# Python (if scripts/ ever gets Python tooling)
+__pycache__/
+*.pyc
+.venv/
+venv/

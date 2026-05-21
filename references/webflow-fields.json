@@ -1,0 +1,361 @@
+{
+  "site_id": "69bbea57917a7a73aece58a9",
+  "collections": {
+    "profile": {
+      "id": "69d69c16945c89eef261f630",
+      "display_name": "Profile",
+      "singular_name": "Person",
+      "slug": "profiles",
+      "fields": {
+        "name": {
+          "id": "6d783e0194b875499b9f0da0ad5c6903",
+          "type": "PlainText",
+          "required": true,
+          "max_length": 256,
+          "source": "data.identity.full_name.value",
+          "notes": "Full name of the person. Required."
+        },
+        "slug": {
+          "id": "1d28fc2a793f1a2f6c04ce893d758b06",
+          "type": "PlainText",
+          "required": true,
+          "max_length": 256,
+          "pattern": "alphanumeric, hyphens only, no spaces or special chars",
+          "source": "generated from name (lowercase, hyphens)",
+          "notes": "URL slug. Required. Example: 'alexander-laurent'"
+        },
+        "wikidata": {
+          "id": "efdea9d3f95c1a36130e4a56a3766a86",
+          "type": "PlainText",
+          "source": "data.identity.wikidata_id"
+        },
+        "seo-title": {
+          "id": "10a650806f3e576064e4ad2d5cd6c16f",
+          "type": "PlainText",
+          "source": "{name} — {Professional Identity}",
+          "notes": "Format: '{full_name} — {Professional Identity}'"
+        },
+        "seo-description": {
+          "id": "3db5481d9d28ddf1be7e50dc4fbc6338",
+          "type": "PlainText",
+          "source": "first 150 chars of Profile Overview"
+        },
+        "profile-photo": {
+          "id": "81fc8ab9896b3723dcbb5e6c75190fff",
+          "type": "Image",
+          "source": "selected photo from photo_candidates after manual rights review",
+          "notes": "Dev mode: leave empty, surface photo_candidates_for_review in output"
+        },
+        "short-description": {
+          "id": "154abcc68e96c1769f79fe6081c5a0c8",
+          "type": "PlainText",
+          "single_line": false,
+          "source": "A.1 Professional Identity",
+          "notes": "THE Professional Identity. 3-10 words. Title Case."
+        },
+        "current-positions": {
+          "id": "b8ffb1422921f6d640cf458881cd28cd",
+          "type": "RichText",
+          "source": "data.current_positions",
+          "format": "B.1 — list of '<p><strong>{role}</strong> at {organization}</p>'"
+        },
+        "location": {
+          "id": "e0d43ad75ccc2e263198c27823e42a6b",
+          "type": "PlainText",
+          "source": "current city of residence (from biographical or career_timeline)"
+        },
+        "location-country": {
+          "id": "5ac22d7ba1070396ddcb5fcc1f783149",
+          "type": "PlainText",
+          "source": "current country of residence"
+        },
+        "profile-categories": {
+          "id": "03d3bba31d1a5b1eb5af464dd687fcb1",
+          "type": "MultiReference",
+          "references_collection": "69d69c20f6cdce775944238b",
+          "source": "B.2 — array of Profile Category item IDs",
+          "notes": "Auto-create new categories if missing"
+        },
+        "primary-category": {
+          "id": "7a497562079ef6a28cec8c9222901023",
+          "type": "Reference",
+          "references_collection": "69d69c20f6cdce775944238b",
+          "source": "B.2 — single Profile Category item ID matching data.areas_of_expertise.primary_field"
+        },
+        "personal-website": {
+          "id": "608964d7dda380f5557a91810641aa97",
+          "type": "Link",
+          "source": "data.online_presence.personal_website"
+        },
+        "company-website": {
+          "id": "05a252b64f7e0b686d0865c1c89709a9",
+          "type": "Link",
+          "source": "URL of primary current company"
+        },
+        "facebook": {
+          "id": "5a9653df0b729cbc74ff7ab83ac72ec3",
+          "type": "Link"
+        },
+        "linkedin": {
+          "id": "be0f6a997accbeec9100e5ddef510996",
+          "type": "Link",
+          "source": "data.online_presence.linkedin_url"
+        },
+        "instagram": {
+          "id": "1a0bfce4ae3d7c65c54827a4cba110a7",
+          "type": "Link"
+        },
+        "twitter-x": {
+          "id": "69b6089fd0bd18ef557bec5f31cb0451",
+          "type": "Link",
+          "source": "data.online_presence.twitter_x_url"
+        },
+        "profile-overview": {
+          "id": "a5e4d407f7a75f8d2d266e46303df4d8",
+          "type": "RichText",
+          "source": "A.2 Profile Overview"
+        },
+        "alternate-name": {
+          "id": "dbeef521c282bc534ca78ee32600431b",
+          "type": "PlainText",
+          "source": "data.identity.alternate_names (comma-joined)"
+        },
+        "gender": {
+          "id": "8c3b8d76c0d1f194ea21af953ae2a9a5",
+          "type": "Option",
+          "source": "data.identity.gender → option ID",
+          "options": {
+            "Male": "17a116e4b50ee3975efa9d652d3fa1dc",
+            "Female": "2bbf44baaae059d7d4f6f105a1f3f783",
+            "Non-binary": "310f3ab9a7220a0485e80898bc25cb62"
+          }
+        },
+        "date-of-birth-2": {
+          "id": "ea9a5ccca328b5e809334b4f5ecf2bf0",
+          "type": "PlainText",
+          "format": "YYYY-MM-DD (or YYYY only if day unknown)",
+          "source": "data.biographical.date_of_birth.value",
+          "notes": "Stored as PlainText, NOT DateTime. Keep ISO format as string."
+        },
+        "place-of-birth": {
+          "id": "9cf5a9fb3933c5d2594539a6fcb67022",
+          "type": "PlainText",
+          "source": "data.biographical.place_of_birth (city only)"
+        },
+        "place-of-birth-country": {
+          "id": "fc8bf21e60373d49a6506b671e6aff04",
+          "type": "PlainText",
+          "source": "data.biographical.place_of_birth (country only)"
+        },
+        "citizenship": {
+          "id": "c485bf7cad4b4639ef92bcac478f408e",
+          "type": "PlainText",
+          "source": "data.biographical.citizenship (comma-joined if multiple)"
+        },
+        "origin": {
+          "id": "4bf2d3a4468a5ac0f5109bd0decbb406",
+          "type": "PlainText",
+          "source": "data.biographical.origin",
+          "notes": "Cultural/ethnic origin (e.g., 'American'), not legal citizenship"
+        },
+        "languages": {
+          "id": "0730788d3796c1ff861b93958641743e",
+          "type": "PlainText",
+          "source": "data.biographical.languages (comma-joined)"
+        },
+        "highest-degree": {
+          "id": "98eab81acde12cb0a335b4dc6011c5e9",
+          "type": "PlainText",
+          "source": "data.education.highest_degree"
+        },
+        "additional-degrees": {
+          "id": "e8ed77c17177c43d588c183ba9c5317a",
+          "type": "PlainText",
+          "source": "data.education.additional_degrees (comma-joined)"
+        },
+        "primary-alma-mater": {
+          "id": "9d101f5f804741b3734a420ca52003f7",
+          "type": "PlainText",
+          "source": "data.education.primary_alma_mater"
+        },
+        "honorary-degrees": {
+          "id": "8a732523d4bc2225246021ad7defa288",
+          "type": "PlainText",
+          "source": "data.education.honorary_degrees (comma-joined)"
+        },
+        "education-highlights-2": {
+          "id": "64d608ffe43c2ae65d903ee584897cf4",
+          "type": "RichText",
+          "source": "data.education.education_highlights",
+          "format": "B.4 — <ul><li>{highlight}</li></ul>"
+        },
+        "career-roles": {
+          "id": "6475bacafcbfbaabe4934e411de1961a",
+          "type": "RichText",
+          "format": "B.4 — Career Timeline + Board & Committee Roles + Founded Organizations sections",
+          "source": "data.career_timeline + data.board_committee_roles + data.founded_organizations"
+        },
+        "primary-field": {
+          "id": "d3c04bc64e737eca069a3f8f84069a80",
+          "type": "PlainText",
+          "source": "data.areas_of_expertise.primary_field"
+        },
+        "other-areas": {
+          "id": "da1715427a8e44e16ccda9b293fd5941",
+          "type": "PlainText",
+          "source": "data.areas_of_expertise.other_areas (comma-joined)"
+        },
+        "expertise-summary": {
+          "id": "468dfc56b09d592d02f532095b8412a0",
+          "type": "RichText",
+          "source": "A.3 Expertise Summary"
+        },
+        "publications-talks": {
+          "id": "756ce382df88dfc68de91eaa04de1dee",
+          "type": "RichText",
+          "format": "B.4 — Authored Works + Profiled In + Notable Mentions + Public Appearances sections",
+          "source": "data.authored_works + data.profiled_in + data.notable_mentions + data.public_appearances"
+        },
+        "selected-quotes": {
+          "id": "56651e07dc844c3e57fb994b684c20e8",
+          "type": "RichText",
+          "format": "B.4 — <blockquote> entries, up to 5",
+          "source": "data.selected_quotes"
+        },
+        "awards-recognition": {
+          "id": "2ba014c849f1912e4b40bf22819c0198",
+          "type": "RichText",
+          "format": "B.4 — Awards and Honors + Reputation Summary (A.4) sections",
+          "source": "data.awards_recognition + A.4"
+        },
+        "economic-footprint": {
+          "id": "8bd31095e0abb1110aebdadcaef4ff20",
+          "type": "RichText",
+          "format": "B.4 — Estimated Net Worth + Known Assets + Economic Impact (A.5) sections",
+          "source": "data.economic_footprint + A.5"
+        },
+        "philanthropy-impact": {
+          "id": "d0bf44268d62bdffda1cffc712e57fbc",
+          "type": "RichText",
+          "format": "B.4 — Areas of Influence + Impact Initiatives + Patronage sections",
+          "source": "data.philanthropy_impact"
+        },
+        "philanthropic-roles": {
+          "id": "2198c6cc8217107b5b746c37034050f4",
+          "type": "RichText",
+          "format": "B.4 — same as Career Timeline structure",
+          "source": "data.philanthropy_impact.philanthropic_roles"
+        },
+        "marital-status": {
+          "id": "019daa5805e00b2171a249b91e2ae55c",
+          "type": "Option",
+          "source": "data.personal_life.marital_status → option ID",
+          "options": {
+            "Single": "021076ffa01d24845e20152b50620c7d",
+            "Married": "672dbe45a49e0cb2bdabbe92e7f01148",
+            "Divorced": "81ae77f3ca67909aa2d946279429d4ca",
+            "Widowed": "24aaf28ea5b996fd2d34176c20ee4b3e",
+            "Separated": "5f0914d86ad469357769b764868f882c"
+          }
+        },
+        "number-of-children": {
+          "id": "6f7021a739f4a661438bd98fb47397fd",
+          "type": "Number",
+          "format": "integer",
+          "allow_negative": false,
+          "min_value": 0,
+          "source": "data.personal_life.number_of_children"
+        },
+        "personal-interests": {
+          "id": "282acee7bcda955d921d6f8752759a43",
+          "type": "RichText",
+          "format": "B.4 — <ul><li>{interest}</li></ul>",
+          "source": "data.personal_life.personal_interests"
+        },
+        "profile-qa": {
+          "id": "28290ec9158c72f0850ed6aefee5634d",
+          "type": "RichText",
+          "source": "A.7 Q&A block"
+        },
+        "editorial-comment-2": {
+          "id": "02a0d9766dd925018f390e68b17e9147",
+          "type": "PlainText",
+          "single_line": false,
+          "source": "A.6 Editorial Comment"
+        },
+        "photos": {
+          "id": "4d69d450fa4eda785cd8f407a110aa9d",
+          "type": "MultiImage",
+          "source": "uploaded photos after manual rights review",
+          "notes": "Dev mode: leave empty, surface candidates in output"
+        },
+        "videos": {
+          "id": "a66672db9f3e4c74974dea02d0e24e43",
+          "type": "RichText",
+          "format": "B.4 — list of video entries with title, link, context, year",
+          "source": "data.video_links"
+        },
+        "country-flags": {
+          "id": "33951a54a1158c79eac424fa9b22369d",
+          "type": "MultiReference",
+          "references_collection": "69e24f513ec23d0170f8f18e",
+          "source": "B.3 — array of Country Flag item IDs",
+          "notes": "Do NOT auto-create. Surface missing countries in notes_to_editor."
+        },
+        "schema-json-ld-3": {
+          "id": "217409479a2565c8bf41a912f87d25b1",
+          "type": "PlainText",
+          "single_line": false,
+          "source": "Phase C — JSON.stringify(schemaObject), single line",
+          "notes": "Full @graph JSON-LD as a string. Embedded into the page via Webflow binding."
+        }
+      }
+    },
+    "profile_categories": {
+      "id": "69d69c20f6cdce775944238b",
+      "display_name": "Profile Categories",
+      "singular_name": "Profile Category",
+      "slug": "profile-categories",
+      "fields": {
+        "name": {
+          "id": "e0edd58caa8b4d8d54f2d5bdb505e97d",
+          "type": "PlainText",
+          "required": true,
+          "max_length": 256
+        },
+        "slug": {
+          "id": "0fd533f9bad529a2d7330fdc3301c983",
+          "type": "PlainText",
+          "required": true,
+          "max_length": 256
+        }
+      }
+    },
+    "country_flags": {
+      "id": "69e24f513ec23d0170f8f18e",
+      "display_name": "Contry Flags",
+      "singular_name": "Contry Flag",
+      "slug": "contry-flag",
+      "notes": "Note typo in collection name ('Contry') — do not fix without client approval",
+      "fields": {
+        "name": {
+          "id": "b92d2cae827fab888c33ad2eb6a73d00",
+          "type": "PlainText",
+          "required": true,
+          "max_length": 256
+        },
+        "slug": {
+          "id": "fa9eb96f22ae42cc12f988ecccd1b752",
+          "type": "PlainText",
+          "required": true,
+          "max_length": 256
+        },
+        "flag-icon": {
+          "id": "bde5593a5a9de3aec620ca7482592fe7",
+          "type": "Image",
+          "notes": "Flag icon image — manual upload only"
+        }
+      }
+    }
+  }
+}
