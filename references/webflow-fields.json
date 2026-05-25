@@ -57,7 +57,7 @@
           "id": "b8ffb1422921f6d640cf458881cd28cd",
           "type": "RichText",
           "source": "data.current_positions",
-          "format": "B.1 — list of '<p><strong>{role}</strong> at {organization}</p>'"
+          "format": "B.1 — one plain '<p>{role} at {organization}</p>' per active role (no bold)"
         },
         "location": {
           "id": "e0d43ad75ccc2e263198c27823e42a6b",
@@ -113,7 +113,8 @@
         "profile-overview": {
           "id": "a5e4d407f7a75f8d2d266e46303df4d8",
           "type": "RichText",
-          "source": "A.2 Profile Overview"
+          "source": "A.2 Profile Overview",
+          "format": "A.2 — single <ul> with one <li> per point (no bold)"
         },
         "alternate-name": {
           "id": "dbeef521c282bc534ca78ee32600431b",
@@ -187,7 +188,7 @@
           "id": "64d608ffe43c2ae65d903ee584897cf4",
           "type": "RichText",
           "source": "data.education.education_highlights",
-          "format": "B.4 — <ul><li>{highlight}</li></ul>"
+          "format": "B.4 — one plain <p> per highlight (no list)"
         },
         "career-roles": {
           "id": "6475bacafcbfbaabe4934e411de1961a",
@@ -300,7 +301,7 @@
           "type": "MultiReference",
           "references_collection": "69e24f513ec23d0170f8f18e",
           "source": "B.3 — array of Country Flag item IDs",
-          "notes": "Do NOT auto-create. Surface missing countries in notes_to_editor."
+          "notes": "Auto-create missing countries (name + slug, isDraft). Leave flag-icon empty for manual upload; report created flags in the final output."
         },
         "schema-json-ld-3": {
           "id": "217409479a2565c8bf41a912f87d25b1",

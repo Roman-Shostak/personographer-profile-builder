@@ -153,12 +153,12 @@ However:
 - Concrete: capital deployed, sectors affected, market structure changes
 - No vague claims ("transformed the industry")
 
-### Editorial Comment (1–2 sentences)
+### Editorial Comment (a full, detailed paragraph)
 
-- Final institutional assessment
-- Highest level of editorial judgment allowed in the profile
-- Still restrained — no hype
-- Example tone: *"X is recognized for long-term contributions to [field], combining [Y] with [Z]."*
+- The final institutional assessment, and the **most expansive editorial block** on the profile — write it out **in depth** (roughly 4–8 sentences / a substantial paragraph), not a one-liner. Don't be sparing with detail.
+- Synthesize the person's overall significance: what they built, why it matters institutionally and historically, how the different strands of their work connect, and their standing in their field.
+- The highest level of editorial judgment allowed in the profile — but still restrained, non-promotional, and fully fact-anchored to the Researcher data.
+- Example tone (expand well beyond this): *"X is recognized for long-term contributions to [field], combining [Y] with [Z]…"*
 
 ### Q&A (3–5 question-answer pairs)
 
@@ -177,11 +177,17 @@ However:
 
 For everything else (Profile Overview, Reputation Summary, etc.), do not mirror source phrasing or sentence structure. Rewrite fully in Personographer's editorial voice.
 
-## Empty fields
+## Missing information
 
-If a category has insufficient source support, leave the corresponding CMS field empty. Never:
-- Insert placeholders ("TBD", "N/A", "Information not available")
+If a category has insufficient source support:
+
+- **PlainText input fields** (the simple text fields that display a label/value — e.g. Alternate Name, Additional Degrees, Origin, Citizenship, Languages, Highest Degree, Primary Alma Mater, Honorary Degrees, Place of Birth): write the literal label **`No information available`** when empty, so the label/value pair isn't left blank.
+- **RichText section fields** (Profile Overview, Career & Roles, Publications & Talks, Economic Footprint, Philanthropy & Impact, etc.): leave **empty** when there's no data — do **NOT** add any label.
+- **Do NOT** apply the label to: required identity fields (`name`, `slug`, `short-description` / Professional Identity); SEO fields; the `schema-json-ld-3` field; the `date-of-birth-2` date field; or any Option (gender, marital status) / Link / Number / Reference / MultiReference / Image / MultiImage field — leave those empty when unknown.
+- **Schema JSON-LD**: NEVER write `No information available` (or any placeholder) — omit the property or node entirely. The label belongs only in the visible PlainText input fields, never in structured data.
+
+Still never:
 - Generate plausible-sounding content from inference
-- Fill an Awards section because "someone at this level probably has awards"
+- Fill a section because "someone at this level probably has [awards / etc.]"
 
-Add the empty field to `validation_warnings` in the output so the editor knows to follow up.
+Add each field set to `No information available` to `validation_warnings` so the editor knows to follow up.
