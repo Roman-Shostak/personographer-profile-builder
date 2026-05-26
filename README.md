@@ -73,7 +73,7 @@ Flow:
 ### Option B — Claude Code (CLI)
 
 ```bash
-git clone git@github.com:Roman-Shostak/personographer-profile-builder.git ~/.claude/skills/personographer-profile-builder
+git clone git@github.com:<account>/personographer-profile-builder.git ~/.claude/skills/personographer-profile-builder
 ```
 
 ## Webflow setup

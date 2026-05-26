@@ -4,11 +4,11 @@
 
 ## Хто ти і з ким працюєш
 
-Ти — Claude, асистент-розробник цього скіла. Працюєш з **Григорієм (Hryhorii Shostak)** — Webflow developer-фрілансером, який розробляє скіл для клієнтського проєкту Personographer.
+Ти — Claude, асистент-розробник цього скіла. Працюєш із **Григорієм** — власником проєкту Personographer.
 
 - **Спілкування з Григорієм — українською.**
 - **Вміст скіла** (SKILL.md, промти, references) — **англійською** для точного тригерингу в Claude.
-- Робоча директорія: `/Users/ju1ceee/Desktop/Projects/personographer-profile-builder`
+- Робоча директорія: `~/Desktop/Projects/personographer-profile-builder`
 
 ## Що ми будуємо
 
@@ -97,20 +97,20 @@ Country Flags ID:         69e24f513ec23d0170f8f18e
 
 ## Workflow з Григорієм
 
-### Як він редагує/оновлює скіл
+### Як редагувати/оновлювати скіл
 
 ```bash
 cd ~/Desktop/Projects/personographer-profile-builder
-# редагує файли (VS Code / Cursor)
+# редагувати файли (VS Code / Cursor)
 git add . && git commit -m "..." && git push
-ppb-zip   # alias який створює свіжий zip на рівень вище
-# завантажує zip у Claude.ai → Settings → Skills (видаляє старий, заливає новий)
+ppb-zip   # alias, що створює свіжий zip на рівень вище
+# завантажити zip у Claude.ai → Settings → Skills (видалити старий, залити новий)
 ```
 
-`ppb-zip` визначений у його `~/.zshrc`:
+`ppb-zip` — зручний alias для `~/.zshrc`:
 
 ```bash
-alias ppb-zip='cd ~/Desktop/projects/personographer-profile-builder && zip -r ../personographer-profile-builder-$(date +%Y%m%d-%H%M).zip . -x "*.DS_Store" "*.git*" "*.zip"'
+alias ppb-zip='cd ~/Desktop/Projects/personographer-profile-builder && zip -r ../personographer-profile-builder-$(date +%Y%m%d-%H%M).zip . -x "*.DS_Store" "*.git*" "*.zip"'
 ```
 
 ### Ітераційний цикл тюнінгу
@@ -126,12 +126,12 @@ alias ppb-zip='cd ~/Desktop/projects/personographer-profile-builder && zip -r ..
 
 ## Поточний статус (станом на 2026-05-26)
 
-- ✅ Скіл написаний, на GitHub (https://github.com/Roman-Shostak/personographer-profile-builder)
+- ✅ Скіл написаний, у git-репозиторії проєкту
 - ✅ Webflow MCP підключений у Григорія в Claude.ai; workflow git+zip налаштований
 - ✅ Внесено цикл правок: контракт форматування RichText (plain/bold/li), schema у `<script>`, медіа через чекпойнт, автостворення categories+country flags, Career & Roles за підтвердженою розкладкою, новий `references/section-layouts.md`
 - 🔄 **ПІВОТ СХЕМИ (2026-05-26):** Григорій дав канонічну схему, яку очікує його Webflow-сайт (`actual-schema.json` → скопійовано в `references/schema-template.json`). Тепер скіл **відтворює саме цю структуру**, наповнену фактами особи, опускаючи порожнє, **не змінюючи типи нод і звʼязки**. Це **заміщує** два пункти нижче. Переписано: `prompts/02-mapper.md` Phase C, `prompts/03-validator.md` (тепер conform-check, а не "валідизація з вирізанням"), `references/schema-rules.md`.
   - Канон: `additionalProperty` **залишається** на Person (catch-all для всіх редакційних полів, 17 `PropertyValue`); ролі — на боці Organization (`member` → `OrganizationRole`), а `worksFor`/`memberOf` Person — це **прості `{"@id"}` рефи**; `hasOccupation` — **одна** нода `Occupation` (name/occupationalCategory/skills); нові типи: `ProfilePage` (не WebPage), окрема `BreadcrumbList`, `Project` (філантропія), `ItemList` (#related-persons), `identifier` (Wikidata + Personographer ID).
-  - ⚠️ `additionalProperty` на Person строгий валідатор може показати мʼяким notice — це очікувано/прийнятно (так хоче Григорій, щоб увесь редакційний контент був у structured data).
+  - ⚠️ `additionalProperty` на Person строгий валідатор може показати мʼяким notice — це очікувано/прийнятно (канонічна схема навмисно тримає увесь редакційний контент у structured data).
 - ⛔ ~~Після першого тесту (Musk): hasOccupation валідний (occupationLocation→AdministrativeArea), орг+дати через OrganizationRole у worksFor/memberOf~~ — **заміщено півотом** (тепер OrganizationRole на боці Organization; Occupation одинарний зі skills). Stage 3 — Validator досі є.
 - ⛔ ~~`additionalProperty` прибрано з Person~~ — **заміщено** (повернуто на Person як канон).
 - ✅ Глобальні ноди завжди self-contained (`#website`/`#organization`) — лишається чинним; ProfilePage посилається на них.
@@ -189,8 +189,8 @@ git log --oneline                      # історія
 
 ## Контакти і посилання
 
-- Репо: https://github.com/Roman-Shostak/personographer-profile-builder
-- Сайт клієнта: https://personographer.com (можливо ще на webflow.io піддомені)
+- Репо: приватний git-репозиторій проєкту
+- Сайт: https://personographer.com (можливо ще на webflow.io піддомені)
 - Приклад готового профайла (стиль-орієнтир): https://personographer.webflow.io/profiles/rinaldo-manfredotti
 
 ---

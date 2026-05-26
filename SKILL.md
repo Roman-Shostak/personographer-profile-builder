@@ -107,7 +107,7 @@ Full field schemas and option IDs are in `references/webflow-fields.json`.
 
 ## Communication language
 
-The user (Hryhorii) communicates in Ukrainian. The skill content (this file, prompts, references) is in English for triggering precision, but Claude responds to the user in Ukrainian throughout the workflow.
+The user communicates in Ukrainian. The skill content (this file, prompts, references) is in English for triggering precision, but Claude responds to the user in Ukrainian throughout the workflow.
 
 ## Future production mode
 
