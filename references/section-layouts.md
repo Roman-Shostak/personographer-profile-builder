@@ -21,14 +21,14 @@ The published Personographer site runs a JavaScript transform script (in the Web
 - ✅ **CONFIRMED** — verified rendering correctly on the live site.
 - 🟡 **PENDING** — not yet verified; current Mapper template is a best guess and bold-marker placement may still change.
 
-> `data-cms-layout` / `data-cms-custom` values below are the keys the transform script expects. The actual attribute on each rich-text element is set in Roman's Webflow Designer; treat PENDING bindings as "to confirm against the live render".
+> `data-cms-layout` / `data-cms-custom` values below are the keys the transform script expects. The actual attribute on each rich-text element is set in Hryhorii's Webflow Designer; treat PENDING bindings as "to confirm against the live render".
 
 ---
 
 ## ✅ Career & Roles — `career-roles`
 
 - **data-cms-layout:** `career-and-roles` (structure `h3-h4-nested`)
-- Verified working — this is the reference layout Roman confirmed.
+- Verified working — this is the reference layout Hryhorii confirmed.
 
 Structure:
 - `<h3>` = group (Career Timeline / Board & Committee Roles / Founded Organizations)
