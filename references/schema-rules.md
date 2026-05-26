@@ -120,7 +120,7 @@ Valid props only: `name` (= Professional Identity), `occupationalCategory` (= Pr
 
 Array of `{"@type":"PropertyValue","name":"…","value":"…"}`, plain text, in this order. Emit an entry **only if its data exists**:
 
-`Profile Category`, `Profile Status` (= "Fellow", always), `Origin`, `Notable Mentions`, `Education Highlights`, `Primary Field of Expertise`, `Expertise Summary`, `Reputation Summary`, `Known Assets`, `Economic Impact`, `Areas of Influence` (`"A; B; C"`), `Impact Initiatives` (`"A; B"`), `Patronage & Sponsorship`, `Marital Status`, `Number of Children`, `Personal Interests` (`"A; B; C"`), `Editorial Comment`.
+`Profile Category`, `Profile Status` (= "Fellow", always), `Origin`, `Profile Overview` (the A.2 overview as plain text — join the bullet points into sentences), `Notable Mentions`, `Education Highlights`, `Primary Field of Expertise`, `Expertise Summary`, `Reputation Summary`, `Known Assets`, `Economic Impact`, `Areas of Influence` (`"A; B; C"`), `Impact Initiatives` (`"A; B"`), `Patronage & Sponsorship`, `Marital Status`, `Number of Children`, `Personal Interests` (`"A; B; C"`), `Editorial Comment`.
 
 Never write `No information available` into a `value` — omit the entry instead.
 

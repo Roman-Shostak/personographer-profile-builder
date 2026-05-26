@@ -498,20 +498,21 @@ This is where all editorial / CMS text that has no dedicated Schema.org Person p
 1. `Profile Category` — the profile category
 2. `Profile Status` — `"Fellow"` (constant membership tier; always include)
 3. `Origin` — cultural origin
-4. `Notable Mentions` — the notable-mentions text
-5. `Education Highlights` — the education-highlights text
-6. `Primary Field of Expertise` — `primary_field`
-7. `Expertise Summary` — the A.3 text
-8. `Reputation Summary` — the A.4 text
-9. `Known Assets` — the known-assets text
-10. `Economic Impact` — the A.5 text
-11. `Areas of Influence` — `"A; B; C"` (semicolon-joined)
-12. `Impact Initiatives` — `"A; B"` (semicolon-joined)
-13. `Patronage & Sponsorship` — the patronage text
-14. `Marital Status` — the marital-status text
-15. `Number of Children` — the count, as a string
-16. `Personal Interests` — `"A; B; C"` (semicolon-joined)
-17. `Editorial Comment` — the A.6 paragraph
+4. `Profile Overview` — the A.2 overview as **plain text** (join the `<li>` points into running sentences; no HTML/markup)
+5. `Notable Mentions` — the notable-mentions text
+6. `Education Highlights` — the education-highlights text
+7. `Primary Field of Expertise` — `primary_field`
+8. `Expertise Summary` — the A.3 text
+9. `Reputation Summary` — the A.4 text
+10. `Known Assets` — the known-assets text
+11. `Economic Impact` — the A.5 text
+12. `Areas of Influence` — `"A; B; C"` (semicolon-joined)
+13. `Impact Initiatives` — `"A; B"` (semicolon-joined)
+14. `Patronage & Sponsorship` — the patronage text
+15. `Marital Status` — the marital-status text
+16. `Number of Children` — the count, as a string
+17. `Personal Interests` — `"A; B; C"` (semicolon-joined)
+18. `Editorial Comment` — the A.6 paragraph
 
 Each `value` carries the same editorial text as the corresponding CMS field, but as **plain text — no HTML**. Never write `No information available` (or any placeholder) into a `value`; if a field is empty, omit that `PropertyValue` entirely.
 
@@ -575,9 +576,11 @@ The JSON-LD you produce here is a **draft**. Stage 3 (`prompts/03-validator.md`)
 
 1. Create missing Profile Categories via `create_collection_items` if needed.
 2. Create missing Country Flags via `create_collection_items` (`name` + `slug`, `isDraft: true`), auto-setting `flag-icon` from flagcdn.com per B.3.
-3. Build `fieldData` with all mappings from Phase B.
+3. Build the **complete** `fieldData` in one object with **all** mappings from Phase B — every narrative block (incl. `profile-overview`, `expertise-summary`, `education-highlights-2`, `editorial-comment-2`), every section RichText, `current-positions`, identity/bio fields, Option/Reference fields, photos (`{url,alt}`), `videos`, and `schema-json-ld-3`. Do not split this across multiple calls.
 4. Write the **Stage-3-validated** JSON-LD (from `prompts/03-validator.md`, not the raw draft from Phase C) to the `schema-json-ld-3` field, **already wrapped in a script tag**: take `JSON.stringify(validatedSchema)` (single line, no breaks) and wrap it as `<script type="application/ld+json">…</script>`. The field value must be the full string `<script type="application/ld+json">{...}</script>`, not a bare JSON string — the field is rendered via embed on the profile template.
-5. Call `create_collection_items` on collection `69d69c16945c89eef261f630` with `isDraft: true`.
+5. Create the item in **one** `create_collection_items` call on collection `69d69c16945c89eef261f630` with `isDraft: true`. Generate everything (media, narratives, schema) up front so no follow-up patch is needed.
+
+> **⚠️ Updating an existing item — never wipe fields.** If you must call `update_collection_items` after creation (e.g. to fix one field), send **only** the field(s) you are changing, each with a **real value**. Webflow keeps fields you omit, but a field you include with `null` / `""` is **overwritten to empty**. Do **not** rebuild and re-send the whole `fieldData` from memory — you can carry a stale or empty value and silently wipe good content (on a real run this nulled `profile-overview` while adding `education-highlights-2`). When unsure, re-fetch the item first and change only what is needed.
 
 ---
 
