@@ -380,6 +380,8 @@ No lists — each highlight is its own plain `<p>`.
 <!-- repeat per highlight -->
 ```
 
+Compose from `data.education.education_highlights`, **and** — when that is thin or empty — synthesize from other documented education facts already in the JSON: the number/sources of honorary doctorates (`honorary_degrees`), notable schooling, and any concurrent/part-time study captured in the career timeline (e.g. an MSc completed part-time while employed). Stay fact-anchored (no invention), but **do not leave this empty when documented education material exists** — fill the matching `additionalProperty` "Education Highlights" too.
+
 ## B.5. Photos — binding editor-provided images
 
 Photos are NOT researched. At the review checkpoint the editor provides a **URL** for the main portrait and/or each gallery photo (a Webflow asset URL, or any publicly reachable image URL).

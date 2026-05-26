@@ -78,7 +78,7 @@ For every fact, you must cite at least one whitelisted source (URL + publisher +
 - `additional_degrees` — array of prior degrees
 - `primary_alma_mater` — main institution
 - `honorary_degrees` — array of honorary degrees with institution and year
-- `education_highlights` — special fellowships, research programs, distinctions
+- `education_highlights` — **actively populate this for well-documented figures; do not default to `null` when documented education-path material exists.** Capture documented academic distinctions and notable schooling facts: fellowships, scholarships, research programs, academic honors, notable schools/universities attended, where and how they studied (e.g. studied part-time or concurrently while working), and the count/sources of honorary doctorates. Each item must be a documented fact (no invention); only set `null` if genuinely nothing beyond the plain degree list is documented.
 
 ### 4. Career timeline
 
