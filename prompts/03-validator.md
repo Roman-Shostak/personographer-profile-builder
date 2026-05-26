@@ -53,6 +53,7 @@ Go node by node against the template.
 - **`identifier`** holds the Wikidata `PropertyValue` (only if a QID exists) and always the `Personographer ID` `PropertyValue`.
 - **`netWorth`** is a `MonetaryAmount` (`currency` + `value`, or `minValue`/`maxValue`, plus optional `description`).
 - **`award`** is an array of strings.
+- **`Project`** (philanthropy) carries the topic as **`knowsAbout`** (string), never `about` — `Project` is an `Organization` subtype and `about` is invalid on it (valid only on CreativeWork/Event). If a `Project` has `about`, rename it to `knowsAbout`. `funder`/`sponsor` are valid and stay.
 - **Dates** are ISO 8601 (`YYYY`, `YYYY-MM`, or `YYYY-MM-DD`). Prefer the most precise the facts support.
 - **`VideoObject`** (if present) has `name`, `thumbnailUrl`, **`uploadDate`** (ISO `YYYY-MM-DD` — required; if missing, look it up from the watch page), plus `embedUrl`, `contentUrl`, `description`, `about` → Person.
 - **Targets**: `birthPlace`/`homeLocation`/`workLocation` → `Place`; `nationality` → `Country`; `addressCountry` → ISO code; `image` → `ImageObject` (omit entirely if no photo was provided).

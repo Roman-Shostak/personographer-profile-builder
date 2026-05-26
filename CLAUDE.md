@@ -93,7 +93,7 @@ Country Flags ID:         69e24f513ec23d0170f8f18e
 Якщо потрібної категорії/країни нема в multi-ref колекції, Mapper **автостворює** її через MCP (`isDraft: true`) і репортує у фіналі:
 
 - **Profile Categories** — `name` + `slug`.
-- **Country Flags** — `name` + `slug`; `flag-icon` лишає порожнім (Роман довантажує іконку вручну, кожен створений прапор позначається у summary).
+- **Country Flags** — `name` + `slug`; `flag-icon` **автозаливається** з flagcdn.com (SVG за ISO-кодом через `upload_image_by_url`, PNG-фолбек); ручне довантаження лише якщо автозалив не вдався. Кожен створений прапор позначається у summary.
 
 ## Workflow з Романом
 
@@ -138,14 +138,14 @@ alias ppb-zip='cd ~/Desktop/projects/personographer-profile-builder && zip -r ..
 - 🟡 **Ще не запускали жоден повний тест.** Перший прогін — на легкій особі (Bezos / Branson / Musk)
 - 🟡 **`examples/` порожня** — наповнимо після першого вдалого прогону
 - 🟡 Не підтверджено embed `schema-json-ld-3` і transform-скрипт на сторінці-шаблоні у Webflow Designer
-- 🟡 Формат значення для Image/MultiImage у `create_collection_items` (fileId vs об'єкт) — перевіримо емпірично на першому прогоні з фото
+- ✅ **Формат Image/MultiImage — підтверджено (прогін Jensen, 2026-05-26):** значення = `{ "url", "alt" }` (MultiImage — масив таких). Webflow сам тягне файл за URL і створює asset — **без Designer і без `upload_image_by_url`**. Той самий механізм заливає прапори (flagcdn SVG напряму в `flag-icon`). Зашито в Mapper B.5 (фото) і B.3 (прапори). `asset_tool` (Designer-only) більше не потрібен у типовому прогоні.
 
 ## Відкриті питання / TODO
 
 ### Перед/під час першого тесту
 
 - [ ] Підтвердити, що на сторінці-шаблоні профайла є embed, який рендерить `schema-json-ld-3`, і що transform-скрипт RichText активний
-- [ ] Перевірити точний формат прив'язки Image/MultiImage через MCP
+- [x] Формат прив'язки Image/MultiImage — підтверджено (`{ url, alt }`, Webflow тягне за URL; див. статус вище)
 
 ### Після першого тесту
 

@@ -127,7 +127,7 @@ Photos and videos are **not researched** — they are supplied by the operator a
 When a needed multi-reference target is missing, the Mapper auto-creates it via the MCP (`isDraft: true`) and reports it in the final output:
 
 - **Profile Categories** — created with `name` + `slug`.
-- **Country Flags** — created with `name` + `slug`; the `flag-icon` is left empty for the operator to upload manually (each created flag is flagged in the summary).
+- **Country Flags** — created with `name` + `slug`; the `flag-icon` is auto-filled from flagcdn.com (SVG by ISO code, PNG fallback), with manual upload only if the auto-fill fails. Each created flag is reported in the summary.
 
 ## Development workflow
 

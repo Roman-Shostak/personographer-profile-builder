@@ -180,7 +180,7 @@ Filter `data.current_positions` to active roles only (`end_date === "Present"` o
 
 5. For `profile-categories` (MultiReference), additional categories may be added if the person is genuinely multidisciplinary (Dual Identity).
 
-## B.3. Country Flags — creating references
+## B.3. Country Flags — creating references (with auto flag-icon)
 
 1. Collect countries associated with the person:
    - Current country of residence
@@ -189,11 +189,14 @@ Filter `data.current_positions` to active roles only (`end_date === "Present"` o
 
 2. For each country, check the Country Flags collection (`69e24f513ec23d0170f8f18e`).
 
-3. If a country doesn't exist, **auto-create it** via `create_collection_items` with `name` + `slug` and `isDraft: true`. Leave `flag-icon` empty — the editor uploads the icon afterward.
+3. If a country doesn't exist, **auto-create it together with its flag** via `create_collection_items` (`isDraft: true`):
+   a. Map the country name to its ISO 3166-1 **alpha-2** code, lowercased (e.g. United States → `us`, United Kingdom → `gb`, Ukraine → `ua`).
+   b. In the new item's `fieldData`, set `name` + `slug`, and **`flag-icon`** to `{ "url": "https://flagcdn.com/{iso2}.svg", "alt": "Flag of {country}" }`. Webflow **ingests the SVG from that URL and creates the asset itself** — this is a plain Data-API call, so **no `upload_image_by_url` and no Webflow Designer are needed** (see the Image-field note in B.5). This is the confirmed-working mechanism.
+   - **Graceful fallback (never block item creation on the flag):** if the name can't be resolved to an ISO code, omit `flag-icon` and mark `flag_icon_needed: true`. (SVG works; if a raster is ever needed, the same object with `https://flagcdn.com/w320/{iso2}.png` works too.)
 
-4. Use the IDs of existing and newly-created Country Flags items for the `country-flags` field.
+4. Use the IDs of existing and newly-created Country Flags items for the `country-flags` field. **Existing** items keep whatever flag they already have — do not overwrite.
 
-5. Report every Country Flag you created in `referenced_items_created.country_flags`, each marked with `"flag_icon_needed": true` so the final summary can tell the editor to upload the icons.
+5. Report every Country Flag you created in `referenced_items_created.country_flags`: on success `"flag_icon_set": true` with the source URL; on fallback `"flag_icon_needed": true`.
 
 ## B.4. Multi-entry RichText block templates
 
@@ -377,19 +380,22 @@ No lists — each highlight is its own plain `<p>`.
 <!-- repeat per highlight -->
 ```
 
-## B.5. Photos — binding editor-uploaded assets
+## B.5. Photos — binding editor-provided images
 
-Photos are NOT researched. The editor uploads them to the Webflow Asset Manager and, at the review checkpoint, provides the asset **name or URL** for each (Webflow's UI does not expose asset IDs).
+Photos are NOT researched. At the review checkpoint the editor provides a **URL** for the main portrait and/or each gallery photo (a Webflow asset URL, or any publicly reachable image URL).
 
-If photos were provided:
-1. For each name/URL, resolve the asset via `asset_tool > get_all_assets_and_folders` (search by the name, or match the URL) to obtain its `id` and `url`.
-2. Bind the **main portrait** to `profile-photo` (Image field) using the resolved asset id.
-3. Bind the **gallery photos** to `photos` (MultiImage field) as an array of resolved asset ids. `photos` is an independent swiper list — it does NOT include the portrait unless the editor explicitly lists it among the gallery photos.
-4. Use the resolved asset `url` for the Schema `image` node (see C.3).
+**Bind them directly through the Data API — no Designer, no separate upload step.** A Webflow `Image` field accepts an object `{ "url": "<image url>", "alt": "<alt text>" }`; Webflow downloads the file from that URL, creates the asset, and stores it. A `MultiImage` field is an **array** of those objects. This works for both the site's own `*.website-files.com` URLs and external URLs (the same mechanism that pulls flag SVGs from flagcdn.com in B.3).
+
+If photos were provided, put them straight into the `create_collection_items` `fieldData`:
+1. `profile-photo` (Image) → `{ "url": "<portrait url>", "alt": "{full_name}, {current role}" }`.
+2. `photos` (MultiImage) → `[ { "url": "<url>", "alt": "{full_name}" }, … ]`. Independent swiper list — it does **not** include the portrait unless the editor explicitly lists it among the gallery photos.
+3. Use the same URL for the Schema `image` node (see C.3).
 
 If no portrait was provided, leave `profile-photo` empty and omit Schema `image`. If no gallery photos were provided, leave `photos` empty. Treat the two independently.
 
-**Production phase (future skill/agent)**: download approved photos, upload to Webflow Assets via `data_assets_tool > create_asset` (or `asset_tool > upload_image_by_url` for public URLs), then bind the returned asset ids to `profile-photo` / `photos`.
+> **Image-field value format (confirmed on a live run):** `Image` = `{ "url", "alt" }`; `MultiImage` = an array of `{ "url", "alt" }`. You do **not** need a Webflow asset id, and you do **not** need `asset_tool` / `upload_image_by_url` — those are Designer tools that fail when the Webflow Designer isn't open. The Data-API `{ "url" }` path is the default. Only if the editor gives an asset **name** instead of a URL must you resolve it via `asset_tool > get_all_assets_and_folders` first (that step needs the Designer) — so ask for a **URL** at the checkpoint.
+
+**Production phase (future agent):** the same `{ "url" }` ingestion works unattended for any approved public image URL — no Designer dependency.
 
 ---
 
@@ -526,7 +532,7 @@ Generate a separate `@graph` node for each item below, matching the template's `
 
 **Quotation × N** — for `selected_quotes` (include all of them, typically 6–10). `@id`: `…#quote-1`, `…#quote-2`, …. Each: `text` (verbatim, no attribution inside) and `spokenByCharacter` → `{"@id": person}`.
 
-**Project × N** — for philanthropy. `@id`: `https://personographer.com/projects/{slug}#project`. One per impact initiative and per patronage/sponsorship. Each: `name`, `description`, `about` (the related area of influence, as a string), and the person link — `funder` → `{"@id": person}` for funded initiatives / research, `sponsor` → `{"@id": person}` for patronage / sponsorship.
+**Project × N** — for philanthropy. `@id`: `https://personographer.com/projects/{slug}#project`. One per impact initiative and per patronage/sponsorship. Each: `name`, `description`, `knowsAbout` (the related area of influence, as a string — **use `knowsAbout`, not `about`**: `Project` is an `Organization` subtype and `about` is invalid on it), and the person link — `funder` → `{"@id": person}` for funded initiatives / research, `sponsor` → `{"@id": person}` for patronage / sponsorship.
 
 **VideoObject × N** — **only if** the editor provided video link(s) at the checkpoint. `@id`: `…#video-{slug}`. Derive the YouTube id from the URL and **look up the metadata from the watch page**. Build all of:
 - `name` — the video title
@@ -566,7 +572,7 @@ The JSON-LD you produce here is a **draft**. Stage 3 (`prompts/03-validator.md`)
 # Phase D — Create CMS item
 
 1. Create missing Profile Categories via `create_collection_items` if needed.
-2. Create missing Country Flags via `create_collection_items` (`name` + `slug`, leave `flag-icon` empty, `isDraft: true`).
+2. Create missing Country Flags via `create_collection_items` (`name` + `slug`, `isDraft: true`), auto-setting `flag-icon` from flagcdn.com per B.3.
 3. Build `fieldData` with all mappings from Phase B.
 4. Write the **Stage-3-validated** JSON-LD (from `prompts/03-validator.md`, not the raw draft from Phase C) to the `schema-json-ld-3` field, **already wrapped in a script tag**: take `JSON.stringify(validatedSchema)` (single line, no breaks) and wrap it as `<script type="application/ld+json">…</script>`. The field value must be the full string `<script type="application/ld+json">{...}</script>`, not a bare JSON string — the field is rendered via embed on the profile template.
 5. Call `create_collection_items` on collection `69d69c16945c89eef261f630` with `isDraft: true`.
@@ -601,7 +607,7 @@ In dev mode (human review required before publishing):
   },
   "referenced_items_created": {
     "profile_categories": [ { "name": "...", "id": "...", "created": true } ],
-    "country_flags": [ { "name": "...", "id": "...", "created": true, "flag_icon_needed": true } ]
+    "country_flags": [ { "name": "...", "id": "...", "created": true, "flag_icon_set": true, "flag_source": "https://flagcdn.com/{iso2}.svg" } ]
   },
   "schema_jsonld": { "@context": "https://schema.org", "@graph": [ ... ] },
   "validation_warnings": [
@@ -625,4 +631,4 @@ In dev mode (human review required before publishing):
 - Do NOT create a Profile item without required `name` and `slug` fields.
 - Do NOT publish — `isDraft` must be `true` in dev mode.
 - Do NOT exceed 10 words in the Professional Identity.
-- Do NOT set a `flag-icon` when auto-creating Country Flags — leave it empty for the editor to upload, and report each created flag in the final output.
+- When auto-creating a Country Flag, **set its `flag-icon` from flagcdn.com** (SVG by ISO code, PNG fallback) per B.3 — but never overwrite an existing item's flag, and never block item creation if the upload fails (fall back to `flag_icon_needed: true`). Report each created flag in the final output.

@@ -34,7 +34,7 @@ After Stage 1, **stop and show the JSON to the user**. Do not proceed to Stage 2
 
 At this checkpoint, also ask the user two media questions (their answers feed Stage 2):
 - **Videos?** — if yes, the user pastes YouTube link(s). The skill looks up any metadata it needs from the links.
-- **Photos?** — if yes, the user gives the Webflow asset **name or URL** for the main portrait and/or gallery photos (the user uploads them to the Asset Manager; Webflow does not expose asset IDs). If no, the photo/video fields and their Schema nodes stay empty.
+- **Photos?** — if yes, the user gives a **URL** for the main portrait and/or gallery photos (a Webflow asset URL or any public image URL). The skill binds them through the Data API as `{ "url", "alt" }` — Webflow ingests the URL and creates the asset, so no Designer or manual upload is needed. If no, the photo fields and the Schema `image` node stay empty.
 
 ### Stage 2 — Editor / Mapper
 
@@ -58,7 +58,7 @@ After Stage 3, present the user with:
 - The Webflow item URL (draft mode) for review
 - The schema validation report (what was fixed/removed, any residual warnings)
 - Any validation warnings or missing-data notes
-- Any reference items the skill auto-created (Profile Categories, Country Flags) — and a reminder that each new Country Flag still needs its flag-icon uploaded manually
+- Any reference items the skill auto-created (Profile Categories, Country Flags) — each new Country Flag gets its flag-icon auto-filled from flagcdn.com (manual upload only if the auto-fill fails)
 
 ## Files in this skill
 
@@ -103,7 +103,7 @@ Full field schemas and option IDs are in `references/webflow-fields.json`.
 
 6. **Quotes are verbatim**: Selected Quotes must be exact text from Tier 1/2 written sources only — no paraphrasing, no video/podcast/social media quotes.
 
-7. **Photos & videos**: Not researched in Stage 1. At the review checkpoint the skill asks the user; if the user provides YouTube links (videos) or Webflow asset names/URLs (photos), Stage 2 includes them — videos via the `videos` field + `VideoObject` Schema, photos via `profile-photo`/`photos` fields (asset resolved by name/URL) + Schema `image`. If the user provides nothing for one, that field and its Schema node(s) stay empty.
+7. **Photos & videos**: Not researched in Stage 1. At the review checkpoint the skill asks the user; if the user provides YouTube links (videos) or image URLs (photos), Stage 2 includes them — videos via the `videos` field + `VideoObject` Schema, photos via `profile-photo`/`photos` fields (bound through the Data API as `{ url, alt }`; Webflow ingests the URL and creates the asset) + Schema `image`. If the user provides nothing for one, that field and its Schema node(s) stay empty.
 
 ## Communication language
 

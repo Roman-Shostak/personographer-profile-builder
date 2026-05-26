@@ -43,8 +43,8 @@
         "profile-photo": {
           "id": "81fc8ab9896b3723dcbb5e6c75190fff",
           "type": "Image",
-          "source": "selected photo from photo_candidates after manual rights review",
-          "notes": "Dev mode: leave empty, surface photo_candidates_for_review in output"
+          "source": "editor-provided portrait URL at the Stage 2 checkpoint",
+          "notes": "Set via Data API as { url, alt } (B.5); Webflow ingests the URL and creates the asset — no Designer/upload_image_by_url needed. Empty if no portrait provided."
         },
         "short-description": {
           "id": "154abcc68e96c1769f79fe6081c5a0c8",
@@ -287,8 +287,8 @@
         "photos": {
           "id": "4d69d450fa4eda785cd8f407a110aa9d",
           "type": "MultiImage",
-          "source": "uploaded photos after manual rights review",
-          "notes": "Dev mode: leave empty, surface candidates in output"
+          "source": "editor-provided gallery photo URLs at the Stage 2 checkpoint",
+          "notes": "Array of { url, alt } via Data API (B.5); Webflow ingests each URL. Empty if no gallery photos provided."
         },
         "videos": {
           "id": "a66672db9f3e4c74974dea02d0e24e43",
@@ -301,7 +301,7 @@
           "type": "MultiReference",
           "references_collection": "69e24f513ec23d0170f8f18e",
           "source": "B.3 — array of Country Flag item IDs",
-          "notes": "Auto-create missing countries (name + slug, isDraft). Leave flag-icon empty for manual upload; report created flags in the final output."
+          "notes": "Auto-create missing countries (name + slug, isDraft) and auto-set flag-icon from flagcdn.com SVG by ISO code (B.3); report created flags in the final output."
         },
         "schema-json-ld-3": {
           "id": "217409479a2565c8bf41a912f87d25b1",
@@ -354,7 +354,7 @@
         "flag-icon": {
           "id": "bde5593a5a9de3aec620ca7482592fe7",
           "type": "Image",
-          "notes": "Flag icon image — manual upload only"
+          "notes": "Flag icon image — auto-filled via Data API as { url: https://flagcdn.com/{iso}.svg, alt } (B.3); Webflow ingests the SVG. No Designer/upload_image_by_url needed."
         }
       }
     }

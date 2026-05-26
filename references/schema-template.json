@@ -623,7 +623,7 @@
       "funder": {
         "@id": "https://personographer.com/profiles/alexander-laurent#person"
       },
-      "about": "Climate research"
+      "knowsAbout": "Climate research"
     },
     {
       "@type": "Project",
@@ -633,7 +633,7 @@
       "funder": {
         "@id": "https://personographer.com/profiles/alexander-laurent#person"
       },
-      "about": "Engineering education"
+      "knowsAbout": "Engineering education"
     },
     {
       "@type": "Project",
@@ -643,7 +643,7 @@
       "sponsor": {
         "@id": "https://personographer.com/profiles/alexander-laurent#person"
       },
-      "about": "Grid modernization"
+      "knowsAbout": "Grid modernization"
     },
 
     {

@@ -85,7 +85,7 @@ Valid props only: `name` (= Professional Identity), `occupationalCategory` (= Pr
 `text` (verbatim, no attribution inside), `spokenByCharacter` (→ Person). The live-site quotes carousel reads the `<blockquote>` text — keep attribution out of `text`.
 
 ### Project (philanthropy)
-`name`, `description`, `about` (the area of influence, as a string), and **either** `funder` (→ Person, funded initiatives/research) **or** `sponsor` (→ Person, patronage/sponsorship).
+`name`, `description`, `knowsAbout` (the area of influence, as a string), and **either** `funder` (→ Person, funded initiatives/research) **or** `sponsor` (→ Person, patronage/sponsorship). `Project` is an `Organization` subtype, so use **`knowsAbout`** for the topic — **`about` is invalid on `Project`** (it belongs to `CreativeWork`/`Event`).
 
 ### VideoObject (editor-provided videos)
 **Required:** `name`, `description`, `thumbnailUrl` (`https://i.ytimg.com/vi/{id}/hqdefault.jpg`), **`uploadDate`** (ISO `YYYY-MM-DD` — fetch from the watch page, never skip). Plus `embedUrl` (`https://www.youtube.com/embed/{id}`), `contentUrl` (watch URL), `about` (→ Person).
@@ -138,3 +138,4 @@ Never write `No information available` into a `value` — omit the entry instead
 | VideoObject "Missing field uploadDate" | `uploadDate` skipped | fetch the publish date from the watch page; ISO `YYYY-MM-DD` |
 | FAQ answer reads "should be added…" | placeholder answer left in | write the real answer from the facts, or drop the Question |
 | `No information available` inside a schema value | visible-CMS label leaked into JSON-LD | remove it — placeholders live only in visible CMS fields |
+| "about not recognized for Project" | `about` used on a `Project` (philanthropy node) | replace with `knowsAbout` (valid on Organization/Project); `about` is only valid on CreativeWork/Event |
