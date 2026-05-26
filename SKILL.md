@@ -1,6 +1,6 @@
 ---
 name: personographer-profile-builder
-description: Build editorial profiles of notable individuals for Personographer (personographer.com). Use this skill whenever the user mentions building, creating, researching, or generating a profile for a person, biographical research on a public figure, a Personographer CMS item, or asks to "make a profile for [name]" — even when they don't explicitly say "Personographer". Three-stage workflow: (1) Researcher gathers verified facts from Tier 1/2 sources with citations, (2) Editor formulates narrative blocks per Personographer editorial rules (FT/Bloomberg tone, no hype), maps data to the Webflow Profile CMS Collection, and generates Schema.org JSON-LD, (3) Validator audits and repairs the JSON-LD against Schema.org before a draft CMS item is created via the Webflow MCP. Always operate in draft mode and surface the research output for user review before mapping.
+description: Build editorial profiles of notable individuals for Personographer (personographer.com). Use this skill whenever the user mentions building, creating, researching, or generating a profile for a person, biographical research on a public figure, a Personographer CMS item, or asks to "make a profile for [name]" — even when they don't explicitly say "Personographer". Three-stage workflow: (1) Researcher gathers verified facts from Tier 1/2 sources with citations, (2) Editor formulates narrative blocks per Personographer editorial rules (FT/Bloomberg tone, no hype), maps data to the Webflow Profile CMS Collection, and generates Schema.org JSON-LD, (3) Validator audits and repairs the JSON-LD to match the canonical Personographer schema template before a draft CMS item is created via the Webflow MCP. Always operate in draft mode and surface the research output for user review before mapping.
 ---
 
 # Personographer Profile Builder
@@ -40,7 +40,7 @@ At this checkpoint, also ask the user two media questions (their answers feed St
 
 Read `prompts/02-mapper.md` and follow it precisely. The Editor:
 - Takes the Researcher's JSON as input
-- Generates narrative blocks (Professional Identity, Profile Overview, Expertise Summary, Reputation Summary, Economic Impact, Editorial Comment, Q&A) per the editorial rules in `prompts/editorial-rules.md`
+- Generates narrative blocks (Professional Identity, Profile Overview, Expertise Summary, Reputation Summary, Economic Impact, Editorial Comment, Q&A) per the editorial rules in `references/editorial-rules.md`
 - Maps everything to the Webflow Profile collection using exact field slugs from `references/webflow-fields.json` and the RichText structure in `references/section-layouts.md`
 - Generates a draft Schema.org JSON-LD per the template in `references/schema-template.json`
 - Auto-creates missing Profile Categories and Country Flags items
@@ -49,7 +49,7 @@ Photos and videos are provided by the user at the review checkpoint, not researc
 
 ### Stage 3 — Schema Validator / QA
 
-Read `prompts/03-validator.md` and follow it precisely. The Validator takes the draft JSON-LD from Stage 2 and the Researcher facts, then audits and repairs the schema against the Schema.org vocabulary so it is fully valid and high quality (no invalid type/property combinations, no orphan nodes, no fabricated values). The **validated** JSON-LD is what gets written (wrapped in `<script type="application/ld+json">`) to the `schema-json-ld-3` field.
+Read `prompts/03-validator.md` and follow it precisely. The Validator takes the draft JSON-LD from Stage 2 and the Researcher facts, then audits and repairs the schema so it conforms to the canonical Personographer template in `references/schema-template.json` (same node types and relationship directions, empty things omitted, no placeholders, no orphan nodes, no fabricated values). The **validated** JSON-LD is what gets written (wrapped in `<script type="application/ld+json">`) to the `schema-json-ld-3` field.
 
 Only after the schema is validated does the skill create the Profile CMS item as a draft (`isDraft: true`) via the Webflow MCP.
 
@@ -68,13 +68,13 @@ prompts/
   01-researcher.md                  # Stage 1 prompt (Researcher)
   02-mapper.md                      # Stage 2 prompt (Editor/Mapper)
   03-validator.md                   # Stage 3 prompt (Schema Validator / QA)
-  editorial-rules.md                # Personographer editorial principles (FT/Bloomberg tone, no-hype list, Professional Identity rules)
 references/
   webflow-fields.json               # Exact Webflow collection IDs, field slugs, types, and option IDs
-  schema-template.json              # Reference Schema.org JSON-LD structure for a Person profile
-  schema-rules.md                   # Authoritative Schema.org checklist (type→property constraints, required fields, gotchas)
-  source-whitelist.md               # Tier 1 / Tier 2 / authoritative profile sources
+  schema-template.json              # Canonical Schema.org @graph the site expects (fill with the person's facts)
+  schema-rules.md                   # Per-type companion to the template (property reference, gotchas)
   section-layouts.md                # Per-section RichText layout contract for the live-site transform script
+  source-whitelist.md               # Tier 1 / Tier 2 / authoritative profile sources
+  editorial-rules.md                # Personographer editorial principles (FT/Bloomberg tone, no-hype list, Professional Identity rules)
 examples/                           # Reference example outputs (populated during testing)
 ```
 
@@ -91,7 +91,7 @@ Full field schemas and option IDs are in `references/webflow-fields.json`.
 
 ## Critical rules (enforced in both stages)
 
-1. **No hype language**: Never use words like *visionary, renowned, iconic, legendary, world-class, leading, influential, top, famous, successful, award-winning* unless they appear inside a formal award title. Full list in `prompts/editorial-rules.md`.
+1. **No hype language**: Never use words like *visionary, renowned, iconic, legendary, world-class, leading, influential, top, famous, successful, award-winning* unless they appear inside a formal award title. Full list in `references/editorial-rules.md`.
 
 2. **Source discipline**: Researcher only uses sources from `references/source-whitelist.md`. No blogs, no Medium, no tabloids, no AI-generated wikis, no data aggregators without cross-check.
 

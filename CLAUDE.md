@@ -31,14 +31,14 @@ personographer-profile-builder/
 ├── prompts/
 │   ├── 01-researcher.md             # Stage 1 — збір фактів (22 категорії, цитування)
 │   ├── 02-mapper.md                 # Stage 2 — наративи + CMS-маппінг + чернетка Schema + MCP
-│   ├── 03-validator.md              # Stage 3 — QA/ремонт Schema.org розмітки
-│   └── editorial-rules.md           # тон, no-hype list, Professional Identity правила
+│   └── 03-validator.md              # Stage 3 — conform-QA схеми під канонічний шаблон
 ├── references/
 │   ├── webflow-fields.json          # ПОВНА мапа полів Profile collection (ID, slug, типи, option IDs)
-│   ├── schema-template.json         # еталонна Schema.org @graph структура для Person
-│   ├── schema-rules.md              # авторитетний чеклист Schema.org (обмеження типів, обовʼязкові поля, gotchas)
+│   ├── schema-template.json         # канонічна Schema.org @graph структура, яку очікує сайт
+│   ├── schema-rules.md              # per-type компаньйон до шаблону (довідник властивостей, gotchas)
 │   ├── section-layouts.md           # контракт розкладки RichText по секціях під сайт-скрипт
-│   └── source-whitelist.md          # Tier 1/2 + authoritative sources, заборонені джерела
+│   ├── source-whitelist.md          # Tier 1/2 + authoritative sources, заборонені джерела
+│   └── editorial-rules.md           # тон, no-hype list, Professional Identity правила
 └── examples/                        # приклади I/O (few-shot) — наповнимо після перших тестів
 ```
 
@@ -124,14 +124,17 @@ alias ppb-zip='cd ~/Desktop/projects/personographer-profile-builder && zip -r ..
 6. Повторюємо до стабілізації — секція за секцією
 ```
 
-## Поточний статус (станом на 2026-05-23)
+## Поточний статус (станом на 2026-05-26)
 
 - ✅ Скіл написаний, на GitHub (https://github.com/Roman-Shostak/personographer-profile-builder)
 - ✅ Webflow MCP підключений у Романа в Claude.ai; workflow git+zip налаштований
 - ✅ Внесено цикл правок: контракт форматування RichText (plain/bold/li), schema у `<script>`, медіа через чекпойнт, автостворення categories+country flags, Career & Roles за підтвердженою розкладкою, новий `references/section-layouts.md`
-- ✅ Після першого тесту (Musk): виправлено Schema-моделювання ролей — `hasOccupation` лишається, але валідний (`Occupation`: name/occupationalCategory/occupationLocation→AdministrativeArea), а звʼязок з орг+дати йде через `OrganizationRole` у worksFor/memberOf; правило «без сиріт-орг». Додано **Stage 3 — Validator** (`prompts/03-validator.md`)
-- ✅ `additionalProperty` прибрано з Person (невалідно) → мапінг на netWorth/owns/spouse/disambiguatingDescription/knowsAbout/hasCredential; решта редакційних полів лишається в CMS
-- ✅ Другий тест (Musk): схема **0 errors / 0 warnings**. Виявлено: Mapper недетерміновано пропускав глобальні ноди `WebSite`/`Organization` (Phase C.1 була умовною) → `#website`/`#organization` висіли. Виправлено: Phase C.1 тепер **завжди** включає глобальні ноди (self-contained), Stage 3 це перевіряє
+- 🔄 **ПІВОТ СХЕМИ (2026-05-26):** Роман дав канонічну схему, яку очікує його Webflow-сайт (`actual-schema.json` → скопійовано в `references/schema-template.json`). Тепер скіл **відтворює саме цю структуру**, наповнену фактами особи, опускаючи порожнє, **не змінюючи типи нод і звʼязки**. Це **заміщує** два пункти нижче. Переписано: `prompts/02-mapper.md` Phase C, `prompts/03-validator.md` (тепер conform-check, а не "валідизація з вирізанням"), `references/schema-rules.md`.
+  - Канон: `additionalProperty` **залишається** на Person (catch-all для всіх редакційних полів, 17 `PropertyValue`); ролі — на боці Organization (`member` → `OrganizationRole`), а `worksFor`/`memberOf` Person — це **прості `{"@id"}` рефи**; `hasOccupation` — **одна** нода `Occupation` (name/occupationalCategory/skills); нові типи: `ProfilePage` (не WebPage), окрема `BreadcrumbList`, `Project` (філантропія), `ItemList` (#related-persons), `identifier` (Wikidata + Personographer ID).
+  - ⚠️ `additionalProperty` на Person строгий валідатор може показати мʼяким notice — це очікувано/прийнятно (так хоче Роман, щоб увесь редакційний контент був у structured data).
+- ⛔ ~~Після першого тесту (Musk): hasOccupation валідний (occupationLocation→AdministrativeArea), орг+дати через OrganizationRole у worksFor/memberOf~~ — **заміщено півотом** (тепер OrganizationRole на боці Organization; Occupation одинарний зі skills). Stage 3 — Validator досі є.
+- ⛔ ~~`additionalProperty` прибрано з Person~~ — **заміщено** (повернуто на Person як канон).
+- ✅ Глобальні ноди завжди self-contained (`#website`/`#organization`) — лишається чинним; ProfilePage посилається на них.
 - 🟡 **Ще не запускали жоден повний тест.** Перший прогін — на легкій особі (Bezos / Branson / Musk)
 - 🟡 **`examples/` порожня** — наповнимо після першого вдалого прогону
 - 🟡 Не підтверджено embed `schema-json-ld-3` і transform-скрипт на сторінці-шаблоні у Webflow Designer
@@ -156,7 +159,7 @@ alias ppb-zip='cd ~/Desktop/projects/personographer-profile-builder && zip -r ..
 
 ## Ключові редакційні правила (короткий огляд)
 
-Детально — `prompts/editorial-rules.md`. Найважливіше:
+Детально — `references/editorial-rules.md`. Найважливіше:
 
 - **No hype:** заборонені visionary, renowned, iconic, world-class, leading, influential, top, famous, successful, award-winning і подібні
 - **Professional Identity:** 3–10 слів, Title Case, field-level archetype, не посада

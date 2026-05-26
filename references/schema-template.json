@@ -2,89 +2,131 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebSite",
-      "@id": "https://personographer.com/#website",
-      "url": "https://personographer.com/",
-      "name": "Personographer",
-      "description": "Curated profiles of high-net-worth individuals and global leaders.",
-      "publisher": { "@id": "https://personographer.com/#organization" },
-      "inLanguage": "en"
+        "@type": "WebSite",
+        "@id": "https://personographer.com/#website",
+        "url": "https://personographer.com/",
+        "name": "Personographer",
+        "description": "An editorial knowledge platform for curated profiles of notable living people and global leaders.",
+        "inLanguage": "en",
+        "publisher": {
+            "@id": "https://personographer.com/#organization"
+        },
+        "publishingPrinciples": "https://personographer.com/editorial-policy"
     },
-
     {
-      "@type": "Organization",
-      "@id": "https://personographer.com/#organization",
-      "name": "Personographer",
-      "url": "https://personographer.com/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://personographer.com/logo.png",
-        "width": 512,
-        "height": 512
-      },
-      "publishingPrinciples": "https://personographer.com/editorial-principles",
-      "correctionsPolicy": "https://personographer.com/verification-policy",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "hello@personographer.com",
-        "contactType": "customer support"
-      }
-    },
-
-    {
-      "@type": "WebPage",
-      "@id": "https://personographer.com/profiles/alexander-laurent#webpage",
-      "url": "https://personographer.com/profiles/alexander-laurent",
-      "name": "Alexander Laurent — Energy Transition Investor and Industrial Strategist",
-      "isPartOf": { "@id": "https://personographer.com/#website" },
-      "about": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
-      "mainEntity": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
-      "publisher": { "@id": "https://personographer.com/#organization" },
-      "inLanguage": "en",
-      "datePublished": "2025-01-15",
-      "dateModified": "2025-04-22",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Main",
-            "item": "https://personographer.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Persons",
-            "item": "https://personographer.com/profiles"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Alexander Laurent"
-          }
+        "@type": "Organization",
+        "@id": "https://personographer.com/#organization",
+        "name": "Personographer",
+        "url": "https://personographer.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://personographer.com/logo.png",
+            "width": 512,
+            "height": 512
+        },
+        "publishingPrinciples": "https://personographer.com/editorial-policy",
+        "correctionsPolicy": "https://personographer.com/corrections-policy",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "hello@personographer.com",
+            "contactType": "editorial contact"
+        },
+        "sameAs": [
+            "https://www.facebook.com/REPLACE_WITH_PERSONOGRAPHER_PAGE",
+            "https://www.instagram.com/REPLACE_WITH_PERSONOGRAPHER_HANDLE",
+            "https://x.com/REPLACE_WITH_PERSONOGRAPHER_HANDLE",
+            "https://www.linkedin.com/company/REPLACE_WITH_PERSONOGRAPHER_COMPANY_SLUG"
         ]
-      }
+    },
+
+    {
+        "@type": "ProfilePage",
+        "@id": "https://personographer.com/profiles/alexander-laurent#profilepage",
+        "url": "https://personographer.com/profiles/alexander-laurent",
+        "name": "Alexander Laurent Profile",
+        "headline": "Alexander Laurent — Energy Transition Investor and Industrial Strategist",
+        "description": "Profile of Alexander Laurent, Fellow, energy transition investor and industrial strategist.",
+        "inLanguage": "en",
+        "isPartOf": {
+            "@id": "https://personographer.com/#website"
+        },
+        "publisher": {
+            "@id": "https://personographer.com/#organization"
+        },
+        "publishingPrinciples": "https://personographer.com/editorial-policy",
+        "mainEntity": {
+            "@id": "https://personographer.com/profiles/alexander-laurent#person"
+        },
+        "about": {
+            "@id": "https://personographer.com/profiles/alexander-laurent#person"
+        },
+        "breadcrumb": {
+            "@id": "https://personographer.com/profiles/alexander-laurent#breadcrumb"
+        }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://personographer.com/profiles/alexander-laurent#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Main",
+          "item": "https://personographer.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Persons",
+          "item": "https://personographer.com/profiles"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Alexander Laurent",
+          "item": "https://personographer.com/profiles/alexander-laurent"
+        }
+      ]
     },
 
     {
       "@type": "Person",
       "@id": "https://personographer.com/profiles/alexander-laurent#person",
-      "mainEntityOfPage": {
-        "@id": "https://personographer.com/profiles/alexander-laurent#webpage"
-      },
       "url": "https://personographer.com/profiles/alexander-laurent",
+      "mainEntityOfPage": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#profilepage"
+      },
 
       "name": "Alexander Laurent",
       "givenName": "Alexander",
       "familyName": "Laurent",
-      "additionalName": "Michael",
       "alternateName": "Alexander Michael Laurent",
-      "honorificSuffix": "Fellow",
+
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "Wikidata",
+          "value": "REPLACE_WITH_WIKIDATA_QID",
+          "url": "https://www.wikidata.org/wiki/REPLACE_WITH_WIKIDATA_QID"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "Personographer ID",
+          "value": "personographer:person:alexander-laurent"
+        }
+      ],
+
+      "sameAs": [
+        "https://www.wikidata.org/wiki/REPLACE_WITH_WIKIDATA_QID",
+        "https://www.forbes.com/profile/REPLACE_WITH_FORBES_SLUG",
+        "https://www.linkedin.com/in/REPLACE_WITH_LINKEDIN_SLUG",
+        "https://x.com/REPLACE_WITH_X_HANDLE",
+        "https://www.instagram.com/REPLACE_WITH_INSTAGRAM_HANDLE",
+        "https://www.facebook.com/REPLACE_WITH_FACEBOOK_SLUG",
+        "https://REPLACE_WITH_OFFICIAL_WEBSITE"
+      ],
 
       "description": "Energy Transition Investor and Industrial Strategist building long-term infrastructure platforms across grid modernization, regulated utilities, and energy transition strategy.",
-
-      "disambiguatingDescription": "Regarded as a disciplined long-term investor bridging engineering and institutional capital.",
 
       "image": {
         "@type": "ImageObject",
@@ -106,55 +148,43 @@
           "addressCountry": "US"
         }
       },
+
       "nationality": {
         "@type": "Country",
         "name": "United States"
       },
+
+      "workLocation": {
+        "@type": "Place",
+        "name": "New York City, United States"
+      },
+
       "knowsLanguage": ["English", "French", "German"],
       "homeLocation": {
         "@type": "Place",
-        "name": "New York City, United States",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "New York City",
-          "addressCountry": "US"
-        }
+        "name": "New York City, United States"
       },
 
       "jobTitle": ["Chairman", "Managing Partner"],
+
       "worksFor": [
         {
-          "@type": "OrganizationRole",
-          "worksFor": { "@id": "https://personographer.com/organizations/helios-ridge-capital#organization" },
-          "roleName": "Managing Partner",
-          "startDate": "2012"
+          "@id": "https://personographer.com/organizations/helios-ridge-capital#organization"
         },
         {
-          "@type": "OrganizationRole",
-          "worksFor": { "@id": "https://personographer.com/organizations/northshore-energy-systems#organization" },
-          "roleName": "Chairman",
-          "startDate": "2016"
-        },
-        {
-          "@type": "OrganizationRole",
-          "worksFor": { "@id": "https://personographer.com/organizations/northshore-energy-systems#organization" },
-          "roleName": "COO",
-          "startDate": "2006",
-          "endDate": "2012"
+          "@id": "https://personographer.com/organizations/northshore-energy-systems#organization"
         }
       ],
+
       "memberOf": [
         {
-          "@type": "OrganizationRole",
-          "memberOf": { "@id": "https://personographer.com/organizations/prosek-partners#organization" },
-          "roleName": "Board Member",
-          "startDate": "1995-06"
+          "@id": "https://personographer.com/organizations/prosek-partners#organization"
         },
         {
-          "@type": "OrganizationRole",
-          "memberOf": { "@id": "https://personographer.com/organizations/laurent-energy-climate-foundation#organization" },
-          "roleName": "Trustee",
-          "startDate": "2012"
+          "@id": "https://personographer.com/organizations/laurent-energy-climate-foundation#organization"
+        },
+        {
+          "@id": "https://personographer.com/organizations/laurent-foundation#organization"
         }
       ],
 
@@ -192,26 +222,18 @@
         }
       ],
 
-      "hasOccupation": [
-        {
-          "@type": "Occupation",
-          "name": "Managing Partner",
-          "occupationalCategory": "Private Equity & Infrastructure Investment",
-          "occupationLocation": {
-            "@type": "AdministrativeArea",
-            "name": "New York, United States"
-          }
-        },
-        {
-          "@type": "Occupation",
-          "name": "Chairman",
-          "occupationalCategory": "Energy Infrastructure",
-          "occupationLocation": {
-            "@type": "AdministrativeArea",
-            "name": "New York, United States"
-          }
-        }
-      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Energy Transition Investor and Industrial Strategist",
+        "occupationalCategory": "Business, Science & Technology",
+        "skills": [
+          "Energy Infrastructure",
+          "Grid Modernization",
+          "Power Generation & Storage",
+          "Regulated Utilities",
+          "Energy Transition Strategy"
+        ]
+      },
 
       "knowsAbout": [
         "Energy Infrastructure",
@@ -219,63 +241,134 @@
         "Power Generation & Storage",
         "Regulated Utilities",
         "Energy Transition Strategy",
-        "Climate Research",
-        "Engineering Education",
-        "Energy Access"
+        "Climate research",
+        "Engineering education",
+        "Energy access"
       ],
 
       "award": [
-        "Energy Infrastructure Leadership Award (2019)",
-        "Industrial Innovation Recognition Medal (2022)"
+        "Energy Infrastructure Leadership Award, 2019",
+        "Industrial Innovation Recognition Medal, 2022",
+        "Energy Infrastructure Leadership Award, 2022"
       ],
 
       "netWorth": {
         "@type": "MonetaryAmount",
         "currency": "USD",
         "minValue": 1000000000,
-        "maxValue": 3000000000
-      },
-
-      "owns": [
-        { "@id": "https://personographer.com/organizations/helios-ridge-capital#organization" }
-      ],
-
-      "spouse": {
-        "@type": "Person",
-        "name": "Camille Laurent"
+        "maxValue": 3000000000,
+        "description": "Estimated $1–3B"
       },
 
       "subjectOf": [
-        { "@id": "https://personographer.com/profiles/alexander-laurent#article-profile-2019" },
-        { "@id": "https://personographer.com/profiles/alexander-laurent#article-feature-2021" },
-        { "@id": "https://personographer.com/profiles/alexander-laurent#documentary-2020" },
-        { "@id": "https://personographer.com/profiles/alexander-laurent#article-cover-2022" },
-        { "@id": "https://personographer.com/profiles/alexander-laurent#video-keynote-2022" },
-        { "@id": "https://personographer.com/profiles/alexander-laurent#video-panel-2021" },
-        { "@id": "https://personographer.com/profiles/alexander-laurent#faq" }
-      ],
-
-      "performerIn": [
-        { "@id": "https://personographer.com/profiles/alexander-laurent#event-energy-forum-2022" },
         {
-          "@id": "https://personographer.com/profiles/alexander-laurent#event-infrastructure-summit-2021"
+          "@id": "https://personographer.com/articles/alexander-laurent-profile-2019#article"
+        },
+        {
+          "@id": "https://personographer.com/articles/alexander-laurent-feature-interview-2021#article"
+        },
+        {
+          "@id": "https://personographer.com/articles/alexander-laurent-documentary-2020#creativework"
+        },
+        {
+          "@id": "https://personographer.com/articles/alexander-laurent-cover-story-2022#article"
         }
       ],
 
-      "sameAs": [
-        "https://www.linkedin.com/in/alexander-laurent",
-        "https://x.com/alexanderlaurent",
-        "https://www.facebook.com/alexander.laurent",
-        "https://www.instagram.com/alexander.laurent",
-        "https://en.wikipedia.org/wiki/Alexander_Laurent",
-        "https://www.wikidata.org/wiki/Q123456789"
+      "performerIn": [
+        {
+          "@id": "https://personographer.com/events/energy-infrastructure-forum-2022#event"
+        },
+        {
+          "@id": "https://personographer.com/events/infrastructure-investment-summit-2021#event"
+        }
       ],
 
-      "identifier": [
+      "additionalProperty": [
         {
           "@type": "PropertyValue",
-          "propertyID": "Wikidata",
-          "value": "Q123456789"
+          "name": "Profile Category",
+          "value": "Business, Science & Technology"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Profile Status",
+          "value": "Fellow"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Origin",
+          "value": "American"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Notable Mentions",
+          "value": "Referenced among influential energy investors by global business media. Referenced in analysis of regulated utilities reform by a leading economic think tank publication in 2019. Mentioned in context of governance and long term capital allocation."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Education Highlights",
+          "value": "Awarded a clinical research fellowship in heart failure prevention. Focus on grid resilience. Applied industrial energy systems."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Primary Field of Expertise",
+          "value": "Energy Infrastructure"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Expertise Summary",
+          "value": "Person is one of the best in Energy Infrastructure. He is good in Grid Modernization, Power Generation & Storage, Regulated Utilities, Energy Transition Strategy as well."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Reputation Summary",
+          "value": "Regarded as a disciplined long term investor bridging engineering and institutional capital."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Known Assets",
+          "value": "Equity holdings in energy infrastructure companies."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Economic Impact",
+          "value": "Financed and modernized critical grid infrastructure contributing to low-carbon transition."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Areas of Influence",
+          "value": "Climate research; Engineering education; Energy access"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Impact Initiatives",
+          "value": "Funding sustainable energy research; Supporting engineering fellowships"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Patronage & Sponsorship",
+          "value": "Public-private initiatives for grid modernization."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Marital Status",
+          "value": "Married"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Number of Children",
+          "value": "3"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Personal Interests",
+          "value": "Sailing; Long-distance cycling; Contemporary architecture"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Editorial Comment",
+          "value": "Alexander M. Laurent is recognized for long-term contributions to modern energy infrastructure, combining engineering depth with institutional investment discipline."
         }
       ]
     },
@@ -284,12 +377,18 @@
       "@type": "Organization",
       "@id": "https://personographer.com/organizations/helios-ridge-capital#organization",
       "name": "Helios Ridge Capital",
-      "url": "https://heliosridge.example.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "New York",
-        "addressRegion": "NY",
-        "addressCountry": "US"
+      "location": {
+        "@type": "Place",
+        "name": "New York, NY, USA"
+      },
+      "member": {
+        "@type": "OrganizationRole",
+        "member": {
+          "@id": "https://personographer.com/profiles/alexander-laurent#person"
+        },
+        "roleName": "Managing Partner",
+        "startDate": "2012",
+        "description": "Managing Partner at Helios Ridge Capital, 2012–Present."
       }
     },
 
@@ -297,27 +396,49 @@
       "@type": "Organization",
       "@id": "https://personographer.com/organizations/northshore-energy-systems#organization",
       "name": "Northshore Energy Systems",
-      "url": "https://northshore.example.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "New York",
-        "addressRegion": "NY",
-        "addressCountry": "US"
-      }
+      "location": {
+        "@type": "Place",
+        "name": "New York, NY, USA"
+      },
+      "member": [
+        {
+          "@type": "OrganizationRole",
+          "member": {
+            "@id": "https://personographer.com/profiles/alexander-laurent#person"
+          },
+          "roleName": "Chairman",
+          "startDate": "2016",
+          "description": "Chairman at Northshore Energy Systems, 2016–Present."
+        },
+        {
+          "@type": "OrganizationRole",
+          "member": {
+            "@id": "https://personographer.com/profiles/alexander-laurent#person"
+          },
+          "roleName": "COO",
+          "startDate": "2006",
+          "endDate": "2012",
+          "description": "COO at Northshore Energy Systems, 2006–2012."
+        }
+      ]
     },
 
     {
       "@type": "Organization",
       "@id": "https://personographer.com/organizations/prosek-partners#organization",
       "name": "Prosek Partners",
-      "url": "https://www.prosek.com",
+      "founder": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
       "foundingDate": "1998",
-      "founder": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "New York",
-        "addressRegion": "NY",
-        "addressCountry": "US"
+      "member": {
+        "@type": "OrganizationRole",
+        "member": {
+          "@id": "https://personographer.com/profiles/alexander-laurent#person"
+        },
+        "roleName": "Board Member",
+        "startDate": "1995-06",
+        "description": "Board Member at Prosek Partners, Jun 1995–Present."
       }
     },
 
@@ -325,151 +446,204 @@
       "@type": "Organization",
       "@id": "https://personographer.com/organizations/laurent-energy-climate-foundation#organization",
       "name": "Laurent Energy & Climate Foundation",
-      "url": "https://laurent-foundation.example.com",
-      "foundingDate": "2010",
-      "founder": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "New York",
-        "addressRegion": "NY",
-        "addressCountry": "US"
+      "member": {
+        "@type": "OrganizationRole",
+        "member": {
+          "@id": "https://personographer.com/profiles/alexander-laurent#person"
+        },
+        "roleName": "Trustee",
+        "startDate": "2012",
+        "description": "Trustee at Laurent Energy & Climate Foundation, 2012–Present."
+      }
+    },
+
+    {
+      "@type": "Organization",
+      "@id": "https://personographer.com/organizations/laurent-foundation#organization",
+      "name": "Laurent Foundation",
+      "founder": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "member": {
+        "@type": "OrganizationRole",
+        "member": {
+          "@id": "https://personographer.com/profiles/alexander-laurent#person"
+        },
+        "roleName": "Founder",
+        "startDate": "2010",
+        "description": "Founder at Laurent Foundation, 2010–Present."
       }
     },
 
     {
       "@type": "Book",
-      "@id": "https://personographer.com/profiles/alexander-laurent#work-rebuilding-the-grid",
+      "@id": "https://personographer.com/works/rebuilding-the-grid#work",
       "name": "Rebuilding the Grid: Infrastructure for a Low Carbon Economy",
-      "author": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
+      "author": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
       "datePublished": "2018",
       "publisher": {
         "@type": "Organization",
         "name": "Institutional policy publication"
-      }
+      },
+      "genre": "Institutional policy publication"
     },
-
     {
-      "@type": "Article",
-      "@id": "https://personographer.com/profiles/alexander-laurent#work-capital-discipline",
+      "@type": "CreativeWork",
+      "@id": "https://personographer.com/works/capital-discipline-in-energy-transition-markets#work",
       "name": "Capital Discipline in Energy Transition Markets",
-      "headline": "Capital Discipline in Energy Transition Markets",
-      "author": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
-      "datePublished": "2020-06-15",
-      "genre": "Essay",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Global financial journal"
-      }
-    },
-
-    {
-      "@type": "ScholarlyArticle",
-      "@id": "https://personographer.com/profiles/alexander-laurent#work-engineering-resilience",
-      "name": "Engineering Resilience in Modern Power Systems",
-      "headline": "Engineering Resilience in Modern Power Systems",
-      "author": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
-      "datePublished": "2015-02-20",
-      "publisher": {
-        "@type": "Organization",
-        "name": "International energy review"
-      }
-    },
-
-    {
-      "@type": "Report",
-      "@id": "https://personographer.com/profiles/alexander-laurent#work-long-term-capital",
-      "name": "The Role of Long-Term Capital in Regulated Utilities",
-      "headline": "The Role of Long-Term Capital in Regulated Utilities",
-      "author": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
-      "datePublished": "2022-09-01",
-      "genre": "White Paper",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Infrastructure investment forum"
-      }
-    },
-
-    {
-      "@type": "Article",
-      "@id": "https://personographer.com/profiles/alexander-laurent#article-profile-2019",
-      "name": "The Quiet Architect of Grid Capital",
-      "headline": "The Quiet Architect of Grid Capital",
-      "datePublished": "2019-03-12",
-      "author": { "@type": "Person", "name": "Helena Voss" },
-      "publisher": {
-        "@type": "Organization",
-        "name": "International financial newspaper"
+      "author": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
       },
-      "about": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
-    },
-
-    {
-      "@type": "Article",
-      "@id": "https://personographer.com/profiles/alexander-laurent#article-feature-2021",
-      "name": "A Conversation on Long-Term Infrastructure",
-      "headline": "A Conversation on Long-Term Infrastructure",
-      "datePublished": "2021-07-08",
-      "author": { "@type": "Organization", "name": "Global business magazine" },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Global business magazine"
-      },
-      "about": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
-    },
-
-    {
-      "@type": "TVSeries",
-      "@id": "https://personographer.com/profiles/alexander-laurent#documentary-2020",
-      "name": "Documentary",
       "datePublished": "2020",
       "publisher": {
         "@type": "Organization",
-        "name": "Public broadcaster series on energy transition"
+        "name": "Global financial journal"
       },
-      "about": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
+      "genre": "Essay, global financial journal"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://personographer.com/works/engineering-resilience-in-modern-power-systems#work",
+      "name": "Engineering Resilience in Modern Power Systems",
+      "author": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "datePublished": "2015",
+      "publisher": {
+        "@type": "Organization",
+        "name": "International energy review"
+      },
+      "genre": "Research Paper, international energy review"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://personographer.com/works/the-role-of-long-term-capital-in-regulated-utilities#work",
+      "name": "The Role of Long Term Capital in Regulated Utilities",
+      "author": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "datePublished": "2022",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Infrastructure investment forum"
+      },
+      "genre": "White Paper, infrastructure investment forum"
     },
 
     {
       "@type": "Article",
-      "@id": "https://personographer.com/profiles/alexander-laurent#article-cover-2022",
-      "name": "Building for the Energy Transition",
-      "headline": "Building for the Energy Transition",
-      "datePublished": "2022-11-02",
-      "author": { "@type": "Person", "name": "Marcus Feld" },
+      "@id": "https://personographer.com/articles/alexander-laurent-profile-2019#article",
+      "name": "Profile",
+      "datePublished": "2019",
+      "about": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
       "publisher": {
         "@type": "Organization",
-        "name": "Industry-focused sustainability review"
+        "name": "International financial newspaper"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://personographer.com/articles/alexander-laurent-feature-interview-2021#article",
+      "name": "Feature Interview",
+      "datePublished": "2021",
+      "about": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
       },
-      "about": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
+      "publisher": {
+        "@type": "Organization",
+        "name": "Global business magazine"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://personographer.com/articles/alexander-laurent-documentary-2020#creativework",
+      "name": "Documentary",
+      "datePublished": "2020",
+      "about": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Public broadcaster series on energy transition"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://personographer.com/articles/alexander-laurent-cover-story-2022#article",
+      "name": "Cover Story",
+      "datePublished": "2022",
+      "about": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Industry focused sustainability review"
+      }
     },
 
     {
       "@type": "Event",
-      "@id": "https://personographer.com/profiles/alexander-laurent#event-energy-forum-2022",
+      "@id": "https://personographer.com/events/energy-infrastructure-forum-2022#event",
       "name": "Energy Infrastructure Forum",
       "startDate": "2022",
-      "url": "https://example.com/energy-infrastructure-forum-2022",
-      "location": { "@type": "Place", "name": "New York, United States" },
-      "description": "Keynote speaker on grid modernization",
-      "performer": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
+      "description": "Keynote speaker on grid modernization.",
+      "performer": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      }
     },
-
     {
       "@type": "Event",
-      "@id": "https://personographer.com/profiles/alexander-laurent#event-infrastructure-summit-2021",
+      "@id": "https://personographer.com/events/infrastructure-investment-summit-2021#event",
       "name": "Infrastructure Investment Summit",
       "startDate": "2021",
-      "url": "https://example.com/infrastructure-summit-2021",
-      "location": { "@type": "Place", "name": "London, United Kingdom" },
-      "description": "Panelist on infrastructure investment",
-      "performer": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
+      "description": "Panel discussion on energy transition.",
+      "performer": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      }
     },
 
     {
       "@type": "Quotation",
       "@id": "https://personographer.com/profiles/alexander-laurent#quote-1",
-      "text": "Energy transition is not a technology problem — it is a systems and governance challenge.",
-      "spokenByCharacter": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
+      "text": "Energy transition is not a technology problem it is a systems and governance challenge.",
+      "spokenByCharacter": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      }
+    },
+
+    {
+      "@type": "Project",
+      "@id": "https://personographer.com/projects/sustainable-energy-research-funding#project",
+      "name": "Sustainable Energy Research Funding",
+      "description": "Funding sustainable energy research.",
+      "funder": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "about": "Climate research"
+    },
+    {
+      "@type": "Project",
+      "@id": "https://personographer.com/projects/engineering-fellowships-support#project",
+      "name": "Engineering Fellowships Support",
+      "description": "Supporting engineering fellowships.",
+      "funder": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "about": "Engineering education"
+    },
+    {
+      "@type": "Project",
+      "@id": "https://personographer.com/projects/grid-modernization-public-private-initiatives#project",
+      "name": "Grid Modernization Public-Private Initiatives",
+      "description": "Public-private initiatives for grid modernization.",
+      "sponsor": {
+        "@id": "https://personographer.com/profiles/alexander-laurent#person"
+      },
+      "about": "Grid modernization"
     },
 
     {
@@ -477,19 +651,18 @@
       "@id": "https://personographer.com/profiles/alexander-laurent#video-keynote-2022",
       "name": "Keynote on Grid Modernization — Energy Infrastructure Forum, 2022",
       "uploadDate": "2022-09-15",
-      "thumbnailUrl": "https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg",
+      "thumbnailUrl": "https://personographer.com/media/video-keynote-2022-thumb.jpg",
       "embedUrl": "https://www.youtube.com/embed/VIDEO_ID_1",
       "contentUrl": "https://www.youtube.com/watch?v=VIDEO_ID_1",
       "description": "Keynote presentation on grid modernization at Energy Infrastructure Forum 2022.",
       "about": { "@id": "https://personographer.com/profiles/alexander-laurent#person" }
     },
-
     {
       "@type": "VideoObject",
       "@id": "https://personographer.com/profiles/alexander-laurent#video-panel-2021",
       "name": "Panel Discussion on Energy Transition — Infrastructure Summit, 2021",
       "uploadDate": "2021-11-08",
-      "thumbnailUrl": "https://i.ytimg.com/vi/VIDEO_ID_2/hqdefault.jpg",
+      "thumbnailUrl": "https://personographer.com/media/video-panel-2021-thumb.jpg",
       "embedUrl": "https://www.youtube.com/embed/VIDEO_ID_2",
       "contentUrl": "https://www.youtube.com/watch?v=VIDEO_ID_2",
       "description": "Panel discussion on energy transition infrastructure at Infrastructure Summit 2021.",
@@ -499,14 +672,13 @@
     {
       "@type": "FAQPage",
       "@id": "https://personographer.com/profiles/alexander-laurent#faq",
-      "about": { "@id": "https://personographer.com/profiles/alexander-laurent#person" },
       "mainEntity": [
         {
           "@type": "Question",
           "name": "What is Alexander M. Laurent primarily known for?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "He is known for building and scaling long-term energy infrastructure platforms supporting grid modernization."
+            "text": "He is known for building and scaling long term energy infrastructure platforms supporting grid modernization."
           }
         },
         {
@@ -514,7 +686,55 @@
           "name": "How does his background influence his approach to investment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "His engineering background combined with decades in institutional capital allocation shapes a disciplined, systems-level approach to investment decisions."
+            "text": "Answer text should be added from the visible page content."
+          }
+        }
+      ]
+    },
+
+    {
+      "@type": "ItemList",
+      "@id": "https://personographer.com/profiles/alexander-laurent#related-persons",
+      "name": "Leaders in the same category",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Person",
+            "@id": "https://personographer.com/profiles/elon-musk#person",
+            "name": "Elon Musk",
+            "url": "https://personographer.com/profiles/elon-musk"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Person",
+            "@id": "https://personographer.com/profiles/rafaela-aponte-diamant#person",
+            "name": "Rafaela Aponte-Diamant",
+            "url": "https://personographer.com/profiles/rafaela-aponte-diamant"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Person",
+            "@id": "https://personographer.com/profiles/amancio-ortega#person",
+            "name": "Amancio Ortega",
+            "url": "https://personographer.com/profiles/amancio-ortega"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Person",
+            "@id": "https://personographer.com/profiles/bernard-arnault#person",
+            "name": "Bernard Arnault",
+            "url": "https://personographer.com/profiles/bernard-arnault"
           }
         }
       ]

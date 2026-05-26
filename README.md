@@ -10,7 +10,7 @@ A **three-stage pipeline with a mandatory human-review checkpoint after Stage 1*
 
 1. **Researcher** (`prompts/01-researcher.md`) — gathers verified facts from a strict source whitelist (Tier 1/2 publications, authoritative profiles, registries) and returns a structured JSON of raw facts, with full source citations for every claim. It never writes editorial copy and never invents — missing facts stay `null`.
 2. **Editor / Mapper** (`prompts/02-mapper.md`) — takes the Researcher JSON and:
-   - formulates narrative blocks (Professional Identity, Profile Overview, Expertise/Reputation/Economic summaries, Editorial Comment, Q&A) per the editorial rules in `prompts/editorial-rules.md`;
+   - formulates narrative blocks (Professional Identity, Profile Overview, Expertise/Reputation/Economic summaries, Editorial Comment, Q&A) per the editorial rules in `references/editorial-rules.md`;
    - maps everything to the Webflow Profile CMS collection using exact field slugs (`references/webflow-fields.json`) and RichText structures (`references/section-layouts.md`);
    - generates a draft Schema.org JSON-LD (`references/schema-template.json`);
    - auto-creates any missing Profile Categories and Country Flags reference items.
@@ -50,13 +50,14 @@ Flow:
 ├── prompts/
 │   ├── 01-researcher.md             # Stage 1 — fact gathering (22 categories, citations)
 │   ├── 02-mapper.md                 # Stage 2 — editorial + CMS mapping + draft Schema + MCP
-│   ├── 03-validator.md              # Stage 3 — Schema.org QA / repair
-│   └── editorial-rules.md           # Personographer voice rules (referenced by both stages)
+│   └── 03-validator.md              # Stage 3 — Schema QA / repair against the canonical template
 ├── references/
 │   ├── webflow-fields.json          # Exact Profile collection field IDs, slugs, types, option IDs
-│   ├── schema-template.json         # Reference Schema.org JSON-LD @graph structure
+│   ├── schema-template.json         # Canonical Schema.org @graph the site expects
+│   ├── schema-rules.md              # Per-type companion to the template (property reference, gotchas)
 │   ├── section-layouts.md           # Per-section RichText layout contract for the live-site script
-│   └── source-whitelist.md          # Allowed Tier 1/2 sources and forbidden ones
+│   ├── source-whitelist.md          # Allowed Tier 1/2 sources and forbidden ones
+│   └── editorial-rules.md           # Personographer voice rules (referenced by both stages)
 └── examples/                        # Reference I/O outputs — few-shot anchors (added during testing)
 ```
 
@@ -95,7 +96,7 @@ Two things must be set up on the Webflow side for output to render correctly:
 
 ## Editorial principles
 
-The skill enforces Personographer's editorial voice strictly (full rules in `prompts/editorial-rules.md`):
+The skill enforces Personographer's editorial voice strictly (full rules in `references/editorial-rules.md`):
 
 - **No hype** — words like *visionary, renowned, iconic, world-class, leading, influential, top, famous, successful, award-winning* are forbidden in output (unless inside a formal award title).
 - **Source discipline** — only Tier 1/2 publications and authoritative profiles. No blogs, Medium, tabloids, AI-generated wikis, or unverified data aggregators.
